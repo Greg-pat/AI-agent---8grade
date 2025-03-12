@@ -1,14 +1,16 @@
 import streamlit as st
 import openai
 
-# Konfiguracja klucza API (dodaj swój klucz OpenAI)
+# Konfiguracja klucza API (dodawany przez sekrety w Streamlit)
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 st.set_page_config(page_title="Sprawdź swoją wypowiedź!", page_icon="✍️", layout="centered")
 
 st.title("✍️ Sprawdź swoją wypowiedź na egzamin ósmoklasisty!")
 
-st.write("Wpisz swoją pracę (np. e-mail, zaproszenie, wpis na bloga), a asystent AI sprawdzi ją i podpowie, co poprawić, aby zdobyć maksymalną liczbę punktów! 💪")
+st.write("""
+Wpisz swoją pracę (np. e-mail, zaproszenie, wpis na bloga), a asystent AI sprawdzi ją i podpowie, co poprawić, aby zdobyć maksymalną liczbę punktów! 💪
+""")
 
 user_input = st.text_area("Twoja wypowiedź:", height=200)
 
