@@ -1,8 +1,8 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 
-# Konfiguracja klucza API (dodawany przez sekrety w Streamlit)
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+# Konfiguracja klienta OpenAI (z użyciem sekcji Secrets)
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 st.set_page_config(page_title="Sprawdź swoją wypowiedź!", page_icon="✍️", layout="centered")
 
@@ -38,14 +38,14 @@ Oto wypowiedź ucznia:
 \"\"\"{user_input}\"\"\"
 """
 
-            # Wysłanie zapytania do OpenAI GPT
-            response = openai.ChatCompletion.create(
+            # Wywołanie API
+            response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=700
             )
 
-            reply = response['choices'][0]['message']['content']
+            reply = response.choices[0].message.content
 
             # Wyświetlenie odpowiedzi AI
             st.subheader("📝 Twoja ocena i poprawki:")
